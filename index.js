@@ -12,7 +12,7 @@ const isDevelopment = process.env.ENV === 'development';
 
 const REDIS_URL = isDevelopment ?
   'redis://127.0.0.1:6379' :
-  'redis://h:p05f9a274bd0e2414e52cb9516f8cbcead154d7d61502d32d9750180836a7cc05@ec2-34-225-229-4.compute-1.amazonaws.com:19289'
+  'redis://h:pc002b071862432cc878f836deb6c9846b0d10ba3af86fd217c9e0f0b852729a4@ec2-34-196-228-21.compute-1.amazonaws.com:16459'
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
@@ -20,8 +20,8 @@ const app = express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
-//const pubsub = new PubSub({ blockchain, transactionPool, redisUrl: REDIS_URL });
-const pubsub = new PubSub({ blockchain, transactionPool, wallet }); // for PubNub
+const pubsub = new PubSub({ blockchain, transactionPool, redisUrl: REDIS_URL });
+//const pubsub = new PubSub({ blockchain, transactionPool, wallet }); // for PubNub
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
 app.use(bodyParser.json());
